@@ -1,28 +1,13 @@
-secrets:
-  db_password:
-    file: ./secrets/db_mdp.txt
-  db_admin_password:
-    file: ./secrets/db_admin_mdp.txt
-
 services : 
   vapeur:
     build: .
-    container_name: vapeurr
+    container_name: Vapeur
     ports:
     - "3005:3005"
     volumes:
-      - ./prisma/bdd.db:/app/prisma/bdd.db
-      #- ./prisma:/app/prisma
-      #- ./prisma:/data/prisma
-      #- .:/app
+      - ./prisma/database.db:/app/prisma/database.db
 
     env_file:
       - .env
       
     command: sh -c "npx prisma migrate deploy && npm start"
-
-    #command: sh -c "echo 'bdd mdp:' && cat /run/secrets/db_password && echo 'admin Password:' && cat /run/secrets/db_admin_password && npx prisma migrate deploy && npm start"
-
-    secrets:
-      - db_password
-      - db_admin_password
