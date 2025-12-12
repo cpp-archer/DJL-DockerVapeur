@@ -1,10 +1,10 @@
-FROM node:22
+FROM node:20-bullseye
 
 WORKDIR /app
 
-COPY package.json .
+COPY package*.json ./
 
-RUN npm i
+RUN npm install 
 
 COPY . .
 
